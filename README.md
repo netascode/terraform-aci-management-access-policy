@@ -14,39 +14,31 @@ Location in GUI:
 module "aci_management_access_policy" {
   source = "netascode/management-access-policy/aci"
 
-  name        = "MAP1"
-  description = "My Description"
-  telnet = {
-    admin_state = true
-    port        = 2023
-  }
-  ssh = {
-    admin_state   = true
-    password_auth = true
-    port          = 2022
-    aes128_ctr    = false
-    aes128_gcm    = false
-    aes192_ctr    = false
-    aes256_ctr    = false
-    chacha        = false
-    hmac_sha1     = false
-    hmac_sha2_256 = false
-    hmac_sha2_512 = false
-  }
-  https = {
-    admin_state            = true
-    client_cert_auth_state = false
-    port                   = 2443
-    dh                     = 2048
-    tlsv1                  = true
-    tlsv1_1                = true
-    tlsv1_2                = false
-    keyring                = "KR1"
-  }
-  http = {
-    admin_state = true
-    port        = 2080
-  }
+  name                         = "MAP1"
+  description                  = "My Description"
+  telnet_admin_state           = true
+  telnet_port                  = 2023
+  ssh_admin_state              = true
+  ssh_password_auth            = true
+  ssh_port                     = 2022
+  ssh_aes128_ctr               = false
+  ssh_aes128_gcm               = false
+  ssh_aes192_ctr               = false
+  ssh_aes256_ctr               = false
+  ssh_chacha                   = false
+  ssh_hmac_sha1                = false
+  ssh_hmac_sha2_256            = false
+  ssh_hmac_sha2_512            = false
+  https_admin_state            = true
+  https_client_cert_auth_state = false
+  https_port                   = 2443
+  https_dh                     = 2048
+  https_tlsv1                  = true
+  https_tlsv1_1                = true
+  https_tlsv1_2                = false
+  https_keyring                = "KR1"
+  http_admin_state             = true
+  http_port                    = 2080
 }
 
 ```
@@ -70,10 +62,29 @@ module "aci_management_access_policy" {
 |------|-------------|------|---------|:--------:|
 | <a name="input_name"></a> [name](#input\_name) | Management access policy name. | `string` | n/a | yes |
 | <a name="input_description"></a> [description](#input\_description) | Description. | `string` | `""` | no |
-| <a name="input_telnet"></a> [telnet](#input\_telnet) | Telnet settings. Default value `admin_state`: `false`. Allowed values `port`: 1-65535. Default value `port`: 23. | <pre>object({<br>    admin_state = optional(bool)<br>    port        = optional(number)<br>  })</pre> | `{}` | no |
-| <a name="input_ssh"></a> [ssh](#input\_ssh) | SSH settings. Default value `admin_state`: `true`. Default value `password_auth`: `true`. Allowed values `port`: 1-65535. Default value `port`: 22. Default value `aes128_ctr`: `true`. Default value `aes128_gcm`: `true`. Default value `aes192_ctr`: `true`. Default value `aes256_ctr`: `true`. Default value `chacha`: `true`. Default value `hmac_sha1`: `true`. Default value `hmac_sha2_256`: `true`. Default value `hmac_sha2_512`: `true`. | <pre>object({<br>    admin_state   = optional(bool)<br>    password_auth = optional(bool)<br>    port          = optional(number)<br>    aes128_ctr    = optional(bool)<br>    aes128_gcm    = optional(bool)<br>    aes192_ctr    = optional(bool)<br>    aes256_ctr    = optional(bool)<br>    chacha        = optional(bool)<br>    hmac_sha1     = optional(bool)<br>    hmac_sha2_256 = optional(bool)<br>    hmac_sha2_512 = optional(bool)<br>  })</pre> | `{}` | no |
-| <a name="input_https"></a> [https](#input\_https) | HTTPS settings. Default value `admin_state`: `true`. Default value `client_cert_auth_state`: `false`. Allowed values `port`: 1-65535. Default value `port`: 443. Choices `dh`: `1024`, `2048`, `4096`, `none`. Default value `dh`: `none`. Default value `tlsv1`: `false`. Default value `tlsv1_1`: `true`. Default value `tlsv1_2`: `true`. | <pre>object({<br>    admin_state            = optional(bool)<br>    client_cert_auth_state = optional(bool)<br>    port                   = optional(number)<br>    dh                     = optional(string)<br>    tlsv1                  = optional(bool)<br>    tlsv1_1                = optional(bool)<br>    tlsv1_2                = optional(bool)<br>    keyring                = optional(string)<br>  })</pre> | `{}` | no |
-| <a name="input_http"></a> [http](#input\_http) | HTTP settings. Default value `admin_state`: `false`. Allowed values `port`: 1-65535. Default value `port`: 80. | <pre>object({<br>    admin_state = optional(bool)<br>    port        = optional(number)<br>  })</pre> | `{}` | no |
+| <a name="input_telnet_admin_state"></a> [telnet\_admin\_state](#input\_telnet\_admin\_state) | Telnet admin state. | `bool` | `false` | no |
+| <a name="input_telnet_port"></a> [telnet\_port](#input\_telnet\_port) | Telnet port. | `number` | `23` | no |
+| <a name="input_ssh_admin_state"></a> [ssh\_admin\_state](#input\_ssh\_admin\_state) | SSH admin state. | `bool` | `true` | no |
+| <a name="input_ssh_port"></a> [ssh\_port](#input\_ssh\_port) | SSH port. | `number` | `22` | no |
+| <a name="input_ssh_password_auth"></a> [ssh\_password\_auth](#input\_ssh\_password\_auth) | SSH password authentication. | `bool` | `true` | no |
+| <a name="input_ssh_aes128_ctr"></a> [ssh\_aes128\_ctr](#input\_ssh\_aes128\_ctr) | aes128-ctr cipher. | `bool` | `true` | no |
+| <a name="input_ssh_aes128_gcm"></a> [ssh\_aes128\_gcm](#input\_ssh\_aes128\_gcm) | aes128-gcm cipher. | `bool` | `true` | no |
+| <a name="input_ssh_aes192_ctr"></a> [ssh\_aes192\_ctr](#input\_ssh\_aes192\_ctr) | aes192-ctr cipher. | `bool` | `true` | no |
+| <a name="input_ssh_aes256_ctr"></a> [ssh\_aes256\_ctr](#input\_ssh\_aes256\_ctr) | aes256-ctr cipher. | `bool` | `true` | no |
+| <a name="input_ssh_chacha"></a> [ssh\_chacha](#input\_ssh\_chacha) | chacha cipher. | `bool` | `true` | no |
+| <a name="input_ssh_hmac_sha1"></a> [ssh\_hmac\_sha1](#input\_ssh\_hmac\_sha1) | hmac-sha1 message authentication code. | `bool` | `true` | no |
+| <a name="input_ssh_hmac_sha2_256"></a> [ssh\_hmac\_sha2\_256](#input\_ssh\_hmac\_sha2\_256) | hmac-sha2-256 message authentication code. | `bool` | `true` | no |
+| <a name="input_ssh_hmac_sha2_512"></a> [ssh\_hmac\_sha2\_512](#input\_ssh\_hmac\_sha2\_512) | hmac-sha2-512 message authentication code. | `bool` | `true` | no |
+| <a name="input_https_admin_state"></a> [https\_admin\_state](#input\_https\_admin\_state) | HTTPS admin state. | `bool` | `false` | no |
+| <a name="input_https_client_cert_auth_state"></a> [https\_client\_cert\_auth\_state](#input\_https\_client\_cert\_auth\_state) | HTTPS client certificate authentication state. | `bool` | `false` | no |
+| <a name="input_https_port"></a> [https\_port](#input\_https\_port) | HTTPS port. | `number` | `443` | no |
+| <a name="input_https_dh"></a> [https\_dh](#input\_https\_dh) | HTTPS Diffie-Hellman group. Choices: `1024`, `2048`, `4096` or `none`. | `string` | `"none"` | no |
+| <a name="input_https_tlsv1"></a> [https\_tlsv1](#input\_https\_tlsv1) | HTTPS TLS v1. | `bool` | `false` | no |
+| <a name="input_https_tlsv1_1"></a> [https\_tlsv1\_1](#input\_https\_tlsv1\_1) | HTTPS TLS v1.1. | `bool` | `true` | no |
+| <a name="input_https_tlsv1_2"></a> [https\_tlsv1\_2](#input\_https\_tlsv1\_2) | HTTPS TLS v1.2. | `bool` | `true` | no |
+| <a name="input_https_keyring"></a> [https\_keyring](#input\_https\_keyring) | HTTPS keyring name. | `string` | `""` | no |
+| <a name="input_http_admin_state"></a> [http\_admin\_state](#input\_http\_admin\_state) | HTTP admin state. | `bool` | `false` | no |
+| <a name="input_http_port"></a> [http\_port](#input\_http\_port) | HTTP port. | `number` | `80` | no |
 
 ## Outputs
 

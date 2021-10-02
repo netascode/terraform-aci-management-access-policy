@@ -19,83 +19,170 @@ variable "description" {
   }
 }
 
-variable "telnet" {
-  description = "Telnet settings. Default value `admin_state`: `false`. Allowed values `port`: 1-65535. Default value `port`: 23."
-  type = object({
-    admin_state = optional(bool)
-    port        = optional(number)
-  })
-  default = {}
+variable "telnet_admin_state" {
+  description = "Telnet admin state."
+  type        = bool
+  default     = false
+}
+
+variable "telnet_port" {
+  description = "Telnet port."
+  type        = number
+  default     = 23
 
   validation {
-    condition     = var.telnet.port == null || try(var.telnet.port >= 1 && var.telnet.port <= 65535, false)
-    error_message = "`port`: Minimum value: 1. Maximum value: 65535."
+    condition     = var.telnet_port >= 1 && var.telnet_port <= 65535
+    error_message = "Minimum value: 1. Maximum value: 65535."
   }
 }
 
-variable "ssh" {
-  description = "SSH settings. Default value `admin_state`: `true`. Default value `password_auth`: `true`. Allowed values `port`: 1-65535. Default value `port`: 22. Default value `aes128_ctr`: `true`. Default value `aes128_gcm`: `true`. Default value `aes192_ctr`: `true`. Default value `aes256_ctr`: `true`. Default value `chacha`: `true`. Default value `hmac_sha1`: `true`. Default value `hmac_sha2_256`: `true`. Default value `hmac_sha2_512`: `true`."
-  type = object({
-    admin_state   = optional(bool)
-    password_auth = optional(bool)
-    port          = optional(number)
-    aes128_ctr    = optional(bool)
-    aes128_gcm    = optional(bool)
-    aes192_ctr    = optional(bool)
-    aes256_ctr    = optional(bool)
-    chacha        = optional(bool)
-    hmac_sha1     = optional(bool)
-    hmac_sha2_256 = optional(bool)
-    hmac_sha2_512 = optional(bool)
-  })
-  default = {}
+variable "ssh_admin_state" {
+  description = "SSH admin state."
+  type        = bool
+  default     = true
+}
+
+variable "ssh_port" {
+  description = "SSH port."
+  type        = number
+  default     = 22
 
   validation {
-    condition     = var.ssh.port == null || try(var.ssh.port >= 1 && var.ssh.port <= 65535, false)
-    error_message = "`port`: Minimum value: 1. Maximum value: 65535."
+    condition     = var.ssh_port >= 1 && var.ssh_port <= 65535
+    error_message = "Minimum value: 1. Maximum value: 65535."
   }
 }
 
-variable "https" {
-  description = "HTTPS settings. Default value `admin_state`: `true`. Default value `client_cert_auth_state`: `false`. Allowed values `port`: 1-65535. Default value `port`: 443. Choices `dh`: `1024`, `2048`, `4096`, `none`. Default value `dh`: `none`. Default value `tlsv1`: `false`. Default value `tlsv1_1`: `true`. Default value `tlsv1_2`: `true`."
-  type = object({
-    admin_state            = optional(bool)
-    client_cert_auth_state = optional(bool)
-    port                   = optional(number)
-    dh                     = optional(string)
-    tlsv1                  = optional(bool)
-    tlsv1_1                = optional(bool)
-    tlsv1_2                = optional(bool)
-    keyring                = optional(string)
-  })
-  default = {}
+variable "ssh_password_auth" {
+  description = "SSH password authentication."
+  type        = bool
+  default     = true
+}
+
+variable "ssh_aes128_ctr" {
+  description = "aes128-ctr cipher."
+  type        = bool
+  default     = true
+}
+
+variable "ssh_aes128_gcm" {
+  description = "aes128-gcm cipher."
+  type        = bool
+  default     = true
+}
+
+variable "ssh_aes192_ctr" {
+  description = "aes192-ctr cipher."
+  type        = bool
+  default     = true
+}
+
+variable "ssh_aes256_ctr" {
+  description = "aes256-ctr cipher."
+  type        = bool
+  default     = true
+}
+
+variable "ssh_chacha" {
+  description = "chacha cipher."
+  type        = bool
+  default     = true
+}
+
+variable "ssh_hmac_sha1" {
+  description = "hmac-sha1 message authentication code."
+  type        = bool
+  default     = true
+}
+
+variable "ssh_hmac_sha2_256" {
+  description = "hmac-sha2-256 message authentication code."
+  type        = bool
+  default     = true
+}
+
+variable "ssh_hmac_sha2_512" {
+  description = "hmac-sha2-512 message authentication code."
+  type        = bool
+  default     = true
+}
+
+variable "https_admin_state" {
+  description = "HTTPS admin state."
+  type        = bool
+  default     = false
+}
+
+variable "https_client_cert_auth_state" {
+  description = "HTTPS client certificate authentication state."
+  type        = bool
+  default     = false
+}
+
+variable "https_port" {
+  description = "HTTPS port."
+  type        = number
+  default     = 443
 
   validation {
-    condition     = var.https.port == null || try(var.https.port >= 1 && var.https.port <= 65535, false)
-    error_message = "`port`: Minimum value: 1. Maximum value: 65535."
-  }
-
-  validation {
-    condition     = var.https.dh == null || try(contains(["1024", "2048", "4096", "none"], var.https.dh), false)
-    error_message = "`dh`: Allowed values: `1024`, `2048`, `4096` or `none`."
-  }
-
-  validation {
-    condition     = var.https.keyring == null || try(can(regex("^[a-zA-Z0-9_.-]{0,64}$", var.https.keyring)), false)
-    error_message = "`keyring`: Allowed characters: `a`-`z`, `A`-`Z`, `0`-`9`, `_`, `.`, `-`. Maximum characters: 64."
+    condition     = var.https_port >= 1 && var.https_port <= 65535
+    error_message = "Minimum value: 1. Maximum value: 65535."
   }
 }
 
-variable "http" {
-  description = "HTTP settings. Default value `admin_state`: `false`. Allowed values `port`: 1-65535. Default value `port`: 80."
-  type = object({
-    admin_state = optional(bool)
-    port        = optional(number)
-  })
-  default = {}
+variable "https_dh" {
+  description = "HTTPS Diffie-Hellman group. Choices: `1024`, `2048`, `4096` or `none`."
+  type        = string
+  default     = "none"
 
   validation {
-    condition     = var.http.port == null || try(var.http.port >= 1 && var.http.port <= 65535, false)
-    error_message = "`port`: Minimum value: 1. Maximum value: 65535."
+    condition     = contains(["1024", "2048", "4096", "none"], var.https_dh)
+    error_message = "Allowed values: `1024`, `2048`, `4096` or `none`."
+  }
+}
+
+variable "https_tlsv1" {
+  description = "HTTPS TLS v1."
+  type        = bool
+  default     = false
+}
+
+variable "https_tlsv1_1" {
+  description = "HTTPS TLS v1.1."
+  type        = bool
+  default     = true
+}
+
+variable "https_tlsv1_2" {
+  description = "HTTPS TLS v1.2."
+  type        = bool
+  default     = true
+}
+
+variable "https_keyring" {
+  description = "HTTPS keyring name."
+  type        = string
+  default     = ""
+
+  validation {
+    condition     = can(regex("^[a-zA-Z0-9_.-]{0,64}$", var.https_keyring))
+    error_message = "Allowed characters: `a`-`z`, `A`-`Z`, `0`-`9`, `_`, `.`, `-`. Maximum characters: 64."
+  }
+}
+
+variable "http_admin_state" {
+  description = "HTTP admin state."
+  type        = bool
+  default     = false
+}
+
+variable "http_port" {
+  description = "HTTP port."
+  type        = number
+  default     = 80
+
+  validation {
+    condition     = var.http_port >= 1 && var.http_port <= 65535
+    error_message = "Minimum value: 1. Maximum value: 65535."
   }
 }

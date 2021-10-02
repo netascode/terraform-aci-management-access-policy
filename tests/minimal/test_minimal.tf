@@ -14,11 +14,9 @@ terraform {
 module "main" {
   source = "../.."
 
-  name = "MAP1"
-  ssh = {
-    aes128_gcm = false
-    chacha     = false
-  }
+  name           = "MAP1"
+  ssh_aes128_gcm = false
+  ssh_chacha     = false
 }
 
 data "aci_rest" "commPol" {
