@@ -1,5 +1,6 @@
 module "aci_management_access_policy" {
-  source = "netascode/management-access-policy/aci"
+  source  = "netascode/management-access-policy/aci"
+  version = ">= 0.0.2"
 
   name                         = "MAP1"
   description                  = "My Description"
