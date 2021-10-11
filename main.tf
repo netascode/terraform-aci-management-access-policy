@@ -8,7 +8,7 @@ resource "aci_rest" "commPol" {
 }
 
 resource "aci_rest" "commTelnet" {
-  dn         = "${aci_rest.commPol.id}/telnet"
+  dn         = "${aci_rest.commPol.dn}/telnet"
   class_name = "commTelnet"
   content = {
     name    = "telnet"
@@ -18,7 +18,7 @@ resource "aci_rest" "commTelnet" {
 }
 
 resource "aci_rest" "commSsh" {
-  dn         = "${aci_rest.commPol.id}/ssh"
+  dn         = "${aci_rest.commPol.dn}/ssh"
   class_name = "commSsh"
   content = {
     name         = "ssh"
@@ -31,7 +31,7 @@ resource "aci_rest" "commSsh" {
 }
 
 resource "aci_rest" "commHttps" {
-  dn         = "${aci_rest.commPol.id}/https"
+  dn         = "${aci_rest.commPol.dn}/https"
   class_name = "commHttps"
   content = {
     name                = "https"
@@ -45,7 +45,7 @@ resource "aci_rest" "commHttps" {
 }
 
 resource "aci_rest" "commRsKeyRing" {
-  dn         = "${aci_rest.commHttps.id}/rsKeyRing"
+  dn         = "${aci_rest.commHttps.dn}/rsKeyRing"
   class_name = "commRsKeyRing"
   content = {
     tnPkiKeyRingName = var.https_keyring != "" ? var.https_keyring : "default"
@@ -53,7 +53,7 @@ resource "aci_rest" "commRsKeyRing" {
 }
 
 resource "aci_rest" "commHttp" {
-  dn         = "${aci_rest.commPol.id}/http"
+  dn         = "${aci_rest.commPol.dn}/http"
   class_name = "commHttp"
   content = {
     name         = "http"
