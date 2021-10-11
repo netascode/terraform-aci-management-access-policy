@@ -25,7 +25,7 @@ module "main" {
   ssh_aes128_gcm               = false
   ssh_aes192_ctr               = false
   ssh_aes256_ctr               = false
-  ssh_chacha                   = false
+  ssh_chacha                   = true
   ssh_hmac_sha1                = false
   ssh_hmac_sha2_256            = false
   ssh_hmac_sha2_512            = false
@@ -127,7 +127,7 @@ resource "test_assertions" "commSsh" {
   equal "sshCiphers" {
     description = "sshCiphers"
     got         = data.aci_rest.commSsh.content.sshCiphers
-    want        = ""
+    want        = "chacha20-poly1305@openssh.com"
   }
 
   equal "sshMacs" {
