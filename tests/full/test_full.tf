@@ -5,8 +5,8 @@ terraform {
     }
 
     aci = {
-      source  = "netascode/aci"
-      version = ">=0.2.0"
+      source  = "CiscoDevNet/aci"
+      version = ">=2.0.0"
     }
   }
 }
@@ -41,7 +41,7 @@ module "main" {
   http_port                    = 2080
 }
 
-data "aci_rest" "commPol" {
+data "aci_rest_managed" "commPol" {
   dn = "uni/fabric/comm-${module.main.name}"
 
   depends_on = [module.main]
@@ -52,19 +52,19 @@ resource "test_assertions" "commPol" {
 
   equal "name" {
     description = "name"
-    got         = data.aci_rest.commPol.content.name
+    got         = data.aci_rest_managed.commPol.content.name
     want        = module.main.name
   }
 
   equal "descr" {
     description = "descr"
-    got         = data.aci_rest.commPol.content.descr
+    got         = data.aci_rest_managed.commPol.content.descr
     want        = "My Description"
   }
 }
 
-data "aci_rest" "commTelnet" {
-  dn = "${data.aci_rest.commPol.id}/telnet"
+data "aci_rest_managed" "commTelnet" {
+  dn = "${data.aci_rest_managed.commPol.id}/telnet"
 
   depends_on = [module.main]
 }
@@ -74,25 +74,25 @@ resource "test_assertions" "commTelnet" {
 
   equal "name" {
     description = "name"
-    got         = data.aci_rest.commTelnet.content.name
+    got         = data.aci_rest_managed.commTelnet.content.name
     want        = "telnet"
   }
 
   equal "adminSt" {
     description = "adminSt"
-    got         = data.aci_rest.commTelnet.content.adminSt
+    got         = data.aci_rest_managed.commTelnet.content.adminSt
     want        = "enabled"
   }
 
   equal "port" {
     description = "port"
-    got         = data.aci_rest.commTelnet.content.port
+    got         = data.aci_rest_managed.commTelnet.content.port
     want        = "2023"
   }
 }
 
-data "aci_rest" "commSsh" {
-  dn = "${data.aci_rest.commPol.id}/ssh"
+data "aci_rest_managed" "commSsh" {
+  dn = "${data.aci_rest_managed.commPol.id}/ssh"
 
   depends_on = [module.main]
 }
@@ -102,43 +102,43 @@ resource "test_assertions" "commSsh" {
 
   equal "name" {
     description = "name"
-    got         = data.aci_rest.commSsh.content.name
+    got         = data.aci_rest_managed.commSsh.content.name
     want        = "ssh"
   }
 
   equal "adminSt" {
     description = "adminSt"
-    got         = data.aci_rest.commSsh.content.adminSt
+    got         = data.aci_rest_managed.commSsh.content.adminSt
     want        = "enabled"
   }
 
   equal "passwordAuth" {
     description = "passwordAuth"
-    got         = data.aci_rest.commSsh.content.passwordAuth
+    got         = data.aci_rest_managed.commSsh.content.passwordAuth
     want        = "enabled"
   }
 
   equal "port" {
     description = "port"
-    got         = data.aci_rest.commSsh.content.port
+    got         = data.aci_rest_managed.commSsh.content.port
     want        = "2022"
   }
 
   equal "sshCiphers" {
     description = "sshCiphers"
-    got         = data.aci_rest.commSsh.content.sshCiphers
+    got         = data.aci_rest_managed.commSsh.content.sshCiphers
     want        = "chacha20-poly1305@openssh.com"
   }
 
   equal "sshMacs" {
     description = "sshMacs"
-    got         = data.aci_rest.commSsh.content.sshMacs
+    got         = data.aci_rest_managed.commSsh.content.sshMacs
     want        = ""
   }
 }
 
-data "aci_rest" "commHttps" {
-  dn = "${data.aci_rest.commPol.id}/https"
+data "aci_rest_managed" "commHttps" {
+  dn = "${data.aci_rest_managed.commPol.id}/https"
 
   depends_on = [module.main]
 }
@@ -148,49 +148,49 @@ resource "test_assertions" "commHttps" {
 
   equal "name" {
     description = "name"
-    got         = data.aci_rest.commHttps.content.name
+    got         = data.aci_rest_managed.commHttps.content.name
     want        = "https"
   }
 
   equal "adminSt" {
     description = "adminSt"
-    got         = data.aci_rest.commHttps.content.adminSt
+    got         = data.aci_rest_managed.commHttps.content.adminSt
     want        = "enabled"
   }
 
   equal "clientCertAuthState" {
     description = "clientCertAuthState"
-    got         = data.aci_rest.commHttps.content.clientCertAuthState
+    got         = data.aci_rest_managed.commHttps.content.clientCertAuthState
     want        = "disabled"
   }
 
   equal "dhParam" {
     description = "dhParam"
-    got         = data.aci_rest.commHttps.content.dhParam
+    got         = data.aci_rest_managed.commHttps.content.dhParam
     want        = "2048"
   }
 
   equal "port" {
     description = "port"
-    got         = data.aci_rest.commHttps.content.port
+    got         = data.aci_rest_managed.commHttps.content.port
     want        = "2443"
   }
 
   equal "sslProtocols" {
     description = "sslProtocols"
-    got         = data.aci_rest.commHttps.content.sslProtocols
+    got         = data.aci_rest_managed.commHttps.content.sslProtocols
     want        = "TLSv1,TLSv1.1"
   }
 
   equal "visoreAccess" {
     description = "visoreAccess"
-    got         = data.aci_rest.commHttps.content.visoreAccess
+    got         = data.aci_rest_managed.commHttps.content.visoreAccess
     want        = "enabled"
   }
 }
 
-data "aci_rest" "commRsKeyRing" {
-  dn = "${data.aci_rest.commHttps.id}/rsKeyRing"
+data "aci_rest_managed" "commRsKeyRing" {
+  dn = "${data.aci_rest_managed.commHttps.id}/rsKeyRing"
 
   depends_on = [module.main]
 }
@@ -200,13 +200,13 @@ resource "test_assertions" "commRsKeyRing" {
 
   equal "tnPkiKeyRingName" {
     description = "tnPkiKeyRingName"
-    got         = data.aci_rest.commRsKeyRing.content.tnPkiKeyRingName
+    got         = data.aci_rest_managed.commRsKeyRing.content.tnPkiKeyRingName
     want        = "KR1"
   }
 }
 
-data "aci_rest" "commHttp" {
-  dn = "${data.aci_rest.commPol.id}/http"
+data "aci_rest_managed" "commHttp" {
+  dn = "${data.aci_rest_managed.commPol.id}/http"
 
   depends_on = [module.main]
 }
@@ -216,25 +216,25 @@ resource "test_assertions" "commHttp" {
 
   equal "name" {
     description = "name"
-    got         = data.aci_rest.commHttp.content.name
+    got         = data.aci_rest_managed.commHttp.content.name
     want        = "http"
   }
 
   equal "adminSt" {
     description = "adminSt"
-    got         = data.aci_rest.commHttp.content.adminSt
+    got         = data.aci_rest_managed.commHttp.content.adminSt
     want        = "enabled"
   }
 
   equal "port" {
     description = "port"
-    got         = data.aci_rest.commHttp.content.port
+    got         = data.aci_rest_managed.commHttp.content.port
     want        = "2080"
   }
 
   equal "visoreAccess" {
     description = "visoreAccess"
-    got         = data.aci_rest.commHttp.content.visoreAccess
+    got         = data.aci_rest_managed.commHttp.content.visoreAccess
     want        = "enabled"
   }
 }

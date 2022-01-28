@@ -1,4 +1,4 @@
-resource "aci_rest" "commPol" {
+resource "aci_rest_managed" "commPol" {
   dn         = "uni/fabric/comm-${var.name}"
   class_name = "commPol"
   content = {
@@ -7,8 +7,8 @@ resource "aci_rest" "commPol" {
   }
 }
 
-resource "aci_rest" "commTelnet" {
-  dn         = "${aci_rest.commPol.dn}/telnet"
+resource "aci_rest_managed" "commTelnet" {
+  dn         = "${aci_rest_managed.commPol.dn}/telnet"
   class_name = "commTelnet"
   content = {
     name    = "telnet"
@@ -17,8 +17,8 @@ resource "aci_rest" "commTelnet" {
   }
 }
 
-resource "aci_rest" "commSsh" {
-  dn         = "${aci_rest.commPol.dn}/ssh"
+resource "aci_rest_managed" "commSsh" {
+  dn         = "${aci_rest_managed.commPol.dn}/ssh"
   class_name = "commSsh"
   content = {
     name         = "ssh"
@@ -30,8 +30,8 @@ resource "aci_rest" "commSsh" {
   }
 }
 
-resource "aci_rest" "commHttps" {
-  dn         = "${aci_rest.commPol.dn}/https"
+resource "aci_rest_managed" "commHttps" {
+  dn         = "${aci_rest_managed.commPol.dn}/https"
   class_name = "commHttps"
   content = {
     name                = "https"
@@ -44,16 +44,16 @@ resource "aci_rest" "commHttps" {
   }
 }
 
-resource "aci_rest" "commRsKeyRing" {
-  dn         = "${aci_rest.commHttps.dn}/rsKeyRing"
+resource "aci_rest_managed" "commRsKeyRing" {
+  dn         = "${aci_rest_managed.commHttps.dn}/rsKeyRing"
   class_name = "commRsKeyRing"
   content = {
     tnPkiKeyRingName = var.https_keyring != "" ? var.https_keyring : "default"
   }
 }
 
-resource "aci_rest" "commHttp" {
-  dn         = "${aci_rest.commPol.dn}/http"
+resource "aci_rest_managed" "commHttp" {
+  dn         = "${aci_rest_managed.commPol.dn}/http"
   class_name = "commHttp"
   content = {
     name         = "http"

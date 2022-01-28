@@ -5,8 +5,8 @@ terraform {
     }
 
     aci = {
-      source  = "netascode/aci"
-      version = ">=0.2.0"
+      source  = "CiscoDevNet/aci"
+      version = ">=2.0.0"
     }
   }
 }
@@ -19,7 +19,7 @@ module "main" {
   ssh_chacha     = false
 }
 
-data "aci_rest" "commPol" {
+data "aci_rest_managed" "commPol" {
   dn = "uni/fabric/comm-${module.main.name}"
 
   depends_on = [module.main]
@@ -30,7 +30,7 @@ resource "test_assertions" "commPol" {
 
   equal "name" {
     description = "name"
-    got         = data.aci_rest.commPol.content.name
+    got         = data.aci_rest_managed.commPol.content.name
     want        = module.main.name
   }
 }

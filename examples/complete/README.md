@@ -14,7 +14,7 @@ Note that this example will create resources. Resources can be destroyed with `t
 ```hcl
 module "aci_management_access_policy" {
   source  = "netascode/management-access-policy/aci"
-  version = ">= 0.0.2"
+  version = ">= 0.1.0"
 
   name                         = "MAP1"
   description                  = "My Description"
@@ -42,6 +42,5 @@ module "aci_management_access_policy" {
   http_admin_state             = true
   http_port                    = 2080
 }
-
 ```
 <!-- END_TF_DOCS -->
