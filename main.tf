@@ -39,7 +39,7 @@ resource "aci_rest_managed" "commHttps" {
     clientCertAuthState = var.https_client_cert_auth_state == true ? "enabled" : "disabled"
     dhParam             = var.https_dh
     port                = var.https_port
-    sslProtocols        = join(",", concat(var.https_tlsv1 == true ? ["TLSv1"] : [], var.https_tlsv1_1 == true ? ["TLSv1.1"] : [], var.https_tlsv1_2 == true ? ["TLSv1.2"] : []))
+    sslProtocols        = join(",", concat(var.https_tlsv1 == true ? ["TLSv1"] : [], var.https_tlsv1_1 == true ? ["TLSv1.1"] : [], var.https_tlsv1_2 == true ? ["TLSv1.2"] : [], var.https_tlsv1_3 == true ? ["TLSv1.3"] : []))
     visoreAccess        = "enabled"
   }
 }

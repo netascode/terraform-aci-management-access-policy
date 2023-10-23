@@ -37,6 +37,7 @@ module "aci_management_access_policy" {
   https_tlsv1                  = true
   https_tlsv1_1                = true
   https_tlsv1_2                = false
+  https_tlsv1_3                = false
   https_keyring                = "KR1"
   http_admin_state             = true
   http_port                    = 2080
@@ -82,6 +83,7 @@ module "aci_management_access_policy" {
 | <a name="input_https_tlsv1"></a> [https\_tlsv1](#input\_https\_tlsv1) | HTTPS TLS v1. | `bool` | `false` | no |
 | <a name="input_https_tlsv1_1"></a> [https\_tlsv1\_1](#input\_https\_tlsv1\_1) | HTTPS TLS v1.1. | `bool` | `true` | no |
 | <a name="input_https_tlsv1_2"></a> [https\_tlsv1\_2](#input\_https\_tlsv1\_2) | HTTPS TLS v1.2. | `bool` | `true` | no |
+| <a name="input_https_tlsv1_3"></a> [https\_tlsv1\_3](#input\_https\_tlsv1\_3) | HTTPS TLS v1.3. | `bool` | `false` | no |
 | <a name="input_https_keyring"></a> [https\_keyring](#input\_https\_keyring) | HTTPS keyring name. | `string` | `""` | no |
 | <a name="input_http_admin_state"></a> [http\_admin\_state](#input\_http\_admin\_state) | HTTP admin state. | `bool` | `false` | no |
 | <a name="input_http_port"></a> [http\_port](#input\_http\_port) | HTTP port. | `number` | `80` | no |

@@ -38,6 +38,7 @@ module "main" {
   https_tlsv1                  = true
   https_tlsv1_1                = true
   https_tlsv1_2                = false
+  https_tlsv1_3                = false
   https_keyring                = "KR1"
   http_admin_state             = true
   http_port                    = 2080

@@ -159,6 +159,12 @@ variable "https_tlsv1_2" {
   default     = true
 }
 
+variable "https_tlsv1_3" {
+  description = "HTTPS TLS v1.3."
+  type        = bool
+  default     = false
+}
+
 variable "https_keyring" {
   description = "HTTPS keyring name."
   type        = string
