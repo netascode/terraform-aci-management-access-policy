@@ -1,3 +1,7 @@
+locals {
+  ssh_kexalgos = join(",", concat(var.ssh_curve25519_sha256 == true ? ["curve25519-sha256"] : [], var.ssh_curve25519_sha256_libssh == true ? ["curve25519-sha256@libssh.org"] : [], var.ssh_dh1_sha1 == true ? ["diffie-hellman-group1-sha1"] : [], var.ssh_dh14_sha1 == true ? ["diffie-hellman-group14-sha1"] : [], var.ssh_dh14_sha256 == true ? ["diffie-hellman-group14-sha256"] : [], var.ssh_dh16_sha512 == true ? ["diffie-hellman-group16-sha512"] : [], var.ssh_ecdh_sha2_nistp256 == true ? ["ecdh-sha2-nistp256"] : [], var.ssh_ecdh_sha2_nistp384 == true ? ["ecdh-sha2-nistp384"] : [], var.ssh_ecdh_sha2_nistp521 == true ? ["ecdh-sha2-nistp521"] : []))
+}
+
 resource "aci_rest_managed" "commPol" {
   dn         = "uni/fabric/comm-${var.name}"
   class_name = "commPol"
@@ -27,6 +31,7 @@ resource "aci_rest_managed" "commSsh" {
     port         = var.ssh_port
     sshCiphers   = join(",", concat(var.ssh_aes128_ctr == true ? ["aes128-ctr"] : [], var.ssh_aes128_gcm == true ? ["aes128-gcm@openssh.com"] : [], var.ssh_aes192_ctr == true ? ["aes192-ctr"] : [], var.ssh_aes256_ctr == true ? ["aes256-ctr"] : [], var.ssh_aes256_gcm == true ? ["aes256-gcm@openssh.com"] : [], var.ssh_chacha == true ? ["chacha20-poly1305@openssh.com"] : []))
     sshMacs      = join(",", concat(var.ssh_hmac_sha1 == true ? ["hmac-sha1"] : [], var.ssh_hmac_sha2_256 == true ? ["hmac-sha2-256"] : [], var.ssh_hmac_sha2_512 == true ? ["hmac-sha2-512"] : []))
+    kexAlgos     = length(local.ssh_kexalgos) == 0 ? null : local.ssh_kexalgos
   }
 }
 

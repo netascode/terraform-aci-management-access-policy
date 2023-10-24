@@ -2,6 +2,7 @@
 
 - Support HTTPS TLS v1.3
 - Support SSH AES256-GCM cipher
+- Support SSH KEX Algorithms
 
 ## 0.1.0
 
