@@ -13,6 +13,7 @@ module "aci_management_access_policy" {
   ssh_aes128_gcm               = false
   ssh_aes192_ctr               = false
   ssh_aes256_ctr               = false
+  ssh_aes256_gcm               = false
   ssh_chacha                   = false
   ssh_hmac_sha1                = false
   ssh_hmac_sha2_256            = false

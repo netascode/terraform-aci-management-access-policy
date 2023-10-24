@@ -26,6 +26,7 @@ module "aci_management_access_policy" {
   ssh_aes128_gcm               = false
   ssh_aes192_ctr               = false
   ssh_aes256_ctr               = false
+  ssh_aes256_gcm               = false
   ssh_chacha                   = false
   ssh_hmac_sha1                = false
   ssh_hmac_sha2_256            = false
@@ -72,6 +73,7 @@ module "aci_management_access_policy" {
 | <a name="input_ssh_aes128_gcm"></a> [ssh\_aes128\_gcm](#input\_ssh\_aes128\_gcm) | aes128-gcm cipher. | `bool` | `true` | no |
 | <a name="input_ssh_aes192_ctr"></a> [ssh\_aes192\_ctr](#input\_ssh\_aes192\_ctr) | aes192-ctr cipher. | `bool` | `true` | no |
 | <a name="input_ssh_aes256_ctr"></a> [ssh\_aes256\_ctr](#input\_ssh\_aes256\_ctr) | aes256-ctr cipher. | `bool` | `true` | no |
+| <a name="input_ssh_aes256_gcm"></a> [ssh\_aes256\_gcm](#input\_ssh\_aes256\_gcm) | aes256-gcm cipher. | `bool` | `false` | no |
 | <a name="input_ssh_chacha"></a> [ssh\_chacha](#input\_ssh\_chacha) | chacha cipher. | `bool` | `true` | no |
 | <a name="input_ssh_hmac_sha1"></a> [ssh\_hmac\_sha1](#input\_ssh\_hmac\_sha1) | hmac-sha1 message authentication code. | `bool` | `true` | no |
 | <a name="input_ssh_hmac_sha2_256"></a> [ssh\_hmac\_sha2\_256](#input\_ssh\_hmac\_sha2\_256) | hmac-sha2-256 message authentication code. | `bool` | `true` | no |

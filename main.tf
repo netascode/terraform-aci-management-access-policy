@@ -25,7 +25,7 @@ resource "aci_rest_managed" "commSsh" {
     adminSt      = var.ssh_admin_state == false ? "disabled" : "enabled"
     passwordAuth = var.ssh_password_auth == false ? "disabled" : "enabled"
     port         = var.ssh_port
-    sshCiphers   = join(",", concat(var.ssh_aes128_ctr == true ? ["aes128-ctr"] : [], var.ssh_aes128_gcm == true ? ["aes128-gcm@openssh.com"] : [], var.ssh_aes192_ctr == true ? ["aes192-ctr"] : [], var.ssh_aes256_ctr == true ? ["aes256-ctr"] : [], var.ssh_chacha == true ? ["chacha20-poly1305@openssh.com"] : []))
+    sshCiphers   = join(",", concat(var.ssh_aes128_ctr == true ? ["aes128-ctr"] : [], var.ssh_aes128_gcm == true ? ["aes128-gcm@openssh.com"] : [], var.ssh_aes192_ctr == true ? ["aes192-ctr"] : [], var.ssh_aes256_ctr == true ? ["aes256-ctr"] : [], var.ssh_aes256_gcm == true ? ["aes256-gcm@openssh.com"] : [], var.ssh_chacha == true ? ["chacha20-poly1305@openssh.com"] : []))
     sshMacs      = join(",", concat(var.ssh_hmac_sha1 == true ? ["hmac-sha1"] : [], var.ssh_hmac_sha2_256 == true ? ["hmac-sha2-256"] : [], var.ssh_hmac_sha2_512 == true ? ["hmac-sha2-512"] : []))
   }
 }

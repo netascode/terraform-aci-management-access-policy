@@ -83,6 +83,12 @@ variable "ssh_aes256_ctr" {
   default     = true
 }
 
+variable "ssh_aes256_gcm" {
+  description = "aes256-gcm cipher."
+  type        = bool
+  default     = false
+}
+
 variable "ssh_chacha" {
   description = "chacha cipher."
   type        = bool
