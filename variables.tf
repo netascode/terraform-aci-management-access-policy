@@ -83,6 +83,12 @@ variable "ssh_aes256_ctr" {
   default     = true
 }
 
+variable "ssh_aes256_gcm" {
+  description = "aes256-gcm cipher."
+  type        = bool
+  default     = false
+}
+
 variable "ssh_chacha" {
   description = "chacha cipher."
   type        = bool
@@ -105,6 +111,60 @@ variable "ssh_hmac_sha2_512" {
   description = "hmac-sha2-512 message authentication code."
   type        = bool
   default     = true
+}
+
+variable "ssh_curve25519_sha256" {
+  description = "curve25519-sha256 kex algorithm."
+  type        = bool
+  default     = false
+}
+
+variable "ssh_curve25519_sha256_libssh" {
+  description = "curve25519-sha256 libssh.org kex algorithm."
+  type        = bool
+  default     = false
+}
+
+variable "ssh_dh1_sha1" {
+  description = "diffie-hellman-group1-sha1 kex algorithm."
+  type        = bool
+  default     = false
+}
+
+variable "ssh_dh14_sha1" {
+  description = "diffie-hellman-group14-sha1 kex algorithm."
+  type        = bool
+  default     = false
+}
+
+variable "ssh_dh14_sha256" {
+  description = "diffie-hellman-group14-sha256 kex algorithm."
+  type        = bool
+  default     = false
+}
+
+variable "ssh_dh16_sha512" {
+  description = "diffie-hellman-group16-sha512 kex algorithm."
+  type        = bool
+  default     = false
+}
+
+variable "ssh_ecdh_sha2_nistp256" {
+  description = "ecdh-sha2-nistp256 kex algorithm."
+  type        = bool
+  default     = false
+}
+
+variable "ssh_ecdh_sha2_nistp384" {
+  description = "ecdh-sha2-nistp384 kex algorithm."
+  type        = bool
+  default     = false
+}
+
+variable "ssh_ecdh_sha2_nistp521" {
+  description = "ecdh-sha2-nistp521 kex algorithm."
+  type        = bool
+  default     = false
 }
 
 variable "https_admin_state" {
@@ -157,6 +217,12 @@ variable "https_tlsv1_2" {
   description = "HTTPS TLS v1.2."
   type        = bool
   default     = true
+}
+
+variable "https_tlsv1_3" {
+  description = "HTTPS TLS v1.3."
+  type        = bool
+  default     = false
 }
 
 variable "https_keyring" {
